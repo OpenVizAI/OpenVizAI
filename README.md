@@ -4,7 +4,8 @@
 
 ### Turn any dataset into the right chart. AI picks the chart. JavaScript renders it. Your full dataset never touches an LLM.
 
-![npm](https://img.shields.io/npm/v/@openvizai/core)
+![openvizai/core](https://img.shields.io/badge/openvizai%2Fcore-v0.1.2-0A66C2)
+![openvizai/react](https://img.shields.io/badge/openvizai%2Freact-v0.1.2-0A66C2)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 The missing intelligence layer between your data pipeline and your visualization.
@@ -12,6 +13,11 @@ The missing intelligence layer between your data pipeline and your visualization
 Prompt and data in. Chart out. Under 3,000 tokens. Every time.
 
 </div>
+
+## Documentation
+
+- Docs Home: https://openvizai.vercel.app/
+- Intro: https://openvizai.vercel.app/docs/intro
 
 ## Packages
 
