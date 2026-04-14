@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { OpenVizRenderer, OpenVizDashboard } from "@openvizai/react";
-import { SUPPORTED_CHART_TYPES } from "@openvizai/shared-types";
-import type { ChartType } from "@openvizai/shared-types";
+import {
+  SUPPORTED_CHART_TYPES,
+  SUPPORTED_CHART_LIBRARIES,
+} from "@openvizai/shared-types";
+import type { ChartType, ChartLibrary } from "@openvizai/shared-types";
 import { useChartState } from "../../context/chartContext";
 import { PLAYGROUND_EXAMPLES } from "../../config/playgroundExamples";
 
@@ -35,6 +38,8 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
   const [dataError, setDataError] = useState("");
   const [chartDropdownOpen, setChartDropdownOpen] = useState(false);
   const [selectedExampleId, setSelectedExampleId] = useState("");
+  const [chartLibrary, setChartLibrary] =
+    useState<ChartLibrary>("apexcharts");
 
   const {
     rows,
@@ -202,6 +207,25 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
                 value={dataInput}
                 onChange={(e) => setDataInput(e.target.value)}
               />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label composer-label">Chart Library</label>
+              <select
+                className="form-select composer-input"
+                value={chartLibrary}
+                onChange={(e) => setChartLibrary(e.target.value as ChartLibrary)}
+              >
+                {SUPPORTED_CHART_LIBRARIES.map((library) => (
+                  <option key={library} value={library}>
+                    {library}
+                  </option>
+                ))}
+              </select>
+              <small className="text-muted">
+                Renderer requires chart library selection. Unregistered
+                library/chart pairs show an explicit error.
+              </small>
             </div>
 
             {/* Dashboard Mode Toggle */}
@@ -380,6 +404,7 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
           <div className="card-body result-card-body">
             <OpenVizRenderer
               data={rows}
+              chartLibrary={chartLibrary}
               chartType={chartResult.chart.chart_type}
               chartSpec={chartResult.chart.chartSpec}
               meta={chartResult.meta}
@@ -392,6 +417,7 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
       {isDashboardResult && chartResult.charts.length > 0 && (
         <OpenVizDashboard
           data={rows}
+          chartLibrary={chartLibrary}
           charts={chartResult.charts as any}
           columns={chartResult.charts.length === 1 ? 1 : 2}
         />

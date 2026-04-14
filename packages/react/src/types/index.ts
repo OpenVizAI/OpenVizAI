@@ -1,4 +1,5 @@
 export type {
+  ChartLibrary,
   ChartSpecField,
   ChartSpec,
   ChartMeta,

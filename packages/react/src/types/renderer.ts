@@ -5,6 +5,11 @@ import type {
   ChartMeta,
 } from "@openvizai/shared-types";
 
+/** Chart library key used to resolve renderer components. */
+export type ChartLibrary =
+  | "apexcharts"
+  | (string & {});
+
 /** Optional rendering configuration */
 export type OpenVizConfig = {
   height?: number;
@@ -19,6 +24,8 @@ export type OpenVizConfig = {
 export type OpenVizRendererProps = {
   /** The dataset rows to visualize */
   data: Record<string, unknown>[];
+  /** Chart library to resolve the renderer component from */
+  chartLibrary: ChartLibrary;
   /** Chart type to render */
   chartType: ChartType;
   /** Chart specification describing field mappings */

@@ -3,7 +3,7 @@ import type {
   ChartMeta,
   ChartSpec,
 } from "@openvizai/shared-types";
-import type { OpenVizConfig } from "./renderer.js";
+import type { OpenVizConfig, ChartLibrary } from "./renderer.js";
 
 /** A single chart item for the dashboard */
 export type OpenVizDashboardChartItem = DashboardChartItem;
@@ -12,6 +12,8 @@ export type OpenVizDashboardChartItem = DashboardChartItem;
 export type OpenVizDashboardProps = {
   /** The dataset rows — shared across all charts */
   data: Record<string, unknown>[];
+  /** Chart library applied to all chart cards in this dashboard */
+  chartLibrary: ChartLibrary;
   /** Array of chart configurations returned by analyzeDashboard */
   charts: OpenVizDashboardChartItem[];
   /** Optional rendering config applied to all charts */

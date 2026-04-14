@@ -32,6 +32,7 @@ function ChartError({ message }: { message: string }) {
  *
  * <OpenVizRenderer
  *   data={rows}
+ *   chartLibrary="apexcharts"
  *   chartType={result.chart.chart_type}
  *   chartSpec={result.chart.chartSpec}
  *   meta={result.meta}
@@ -40,18 +41,21 @@ function ChartError({ message }: { message: string }) {
  */
 export default function OpenVizRenderer({
   data,
+  chartLibrary,
   chartType,
   chartSpec,
   meta,
   config,
   className,
 }: OpenVizRendererProps) {
-  const ChartComponent = getChartComponent(chartType);
+  const ChartComponent = getChartComponent(chartLibrary, chartType);
 
   if (!ChartComponent) {
     return (
       <div className={className}>
-        <ChartError message={`Unsupported chart type: "${chartType}"`} />
+        <ChartError
+          message={`Unsupported chart type "${chartType}" for chart library "${chartLibrary}".`}
+        />
       </div>
     );
   }
@@ -68,6 +72,7 @@ export default function OpenVizRenderer({
     <div className={className}>
       <ChartComponent
         data={data}
+        chartLibrary={chartLibrary}
         chartType={chartType}
         chartSpec={chartSpec}
         meta={meta}
