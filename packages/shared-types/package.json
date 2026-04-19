@@ -1,6 +1,6 @@
 {
   "name": "@openvizai/shared-types",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Shared TypeScript contracts and chart constants for OpenVizAI packages.",
   "license": "MIT",
   "author": "Jay Gajera",
