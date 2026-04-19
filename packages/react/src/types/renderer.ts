@@ -6,9 +6,7 @@ import type {
 } from "@openvizai/shared-types";
 
 /** Chart library key used to resolve renderer components. */
-export type ChartLibrary =
-  | "apexcharts"
-  | (string & {});
+export type ChartLibrary = "apexcharts" | "chartjs" | (string & {});
 
 /** Optional rendering configuration */
 export type OpenVizConfig = {

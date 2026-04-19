@@ -21,6 +21,13 @@ const defaultRegistry: ChartRegistry = {
     donut: PieChart,
     radar: RadarChart,
   },
+  chartjs: {
+    line: LineChart,
+    bar: BarChart,
+    pie: PieChart,
+    donut: PieChart,
+    radar: RadarChart,
+  },
 };
 
 function cloneRegistry(source: ChartRegistry): ChartRegistry {

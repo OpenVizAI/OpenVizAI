@@ -17,7 +17,7 @@ export const SUPPORTED_CHART_TYPES = [
 ] as const;
 
 /** Canonical list of chart library keys supported out of the box. */
-export const SUPPORTED_CHART_LIBRARIES = ["apexcharts"] as const;
+export const SUPPORTED_CHART_LIBRARIES = ["apexcharts", "chartjs"] as const;
 
 /** Union of all supported chart type strings: "line" | "radar" | "bar" | "range_bar" | "pie" | "donut" */
 export type ChartType = (typeof SUPPORTED_CHART_TYPES)[number];

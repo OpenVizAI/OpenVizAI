@@ -38,8 +38,7 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
   const [dataError, setDataError] = useState("");
   const [chartDropdownOpen, setChartDropdownOpen] = useState(false);
   const [selectedExampleId, setSelectedExampleId] = useState("");
-  const [chartLibrary, setChartLibrary] =
-    useState<ChartLibrary>("apexcharts");
+  const [chartLibrary, setChartLibrary] = useState<ChartLibrary>("apexcharts");
 
   const {
     rows,
@@ -214,7 +213,9 @@ export default function ChartPlayground({ onGenerate, loading, error }: Props) {
               <select
                 className="form-select composer-input"
                 value={chartLibrary}
-                onChange={(e) => setChartLibrary(e.target.value as ChartLibrary)}
+                onChange={(e) =>
+                  setChartLibrary(e.target.value as ChartLibrary)
+                }
               >
                 {SUPPORTED_CHART_LIBRARIES.map((library) => (
                   <option key={library} value={library}>
