@@ -10,6 +10,8 @@ Core chart intelligence engine for OpenVizAI.
 
 The package is designed for server-side use in APIs, copilots, and analytics systems.
 
+`@openvizai/core` does **not** choose a rendering library. Library selection is done in `@openvizai/react` via `chartLibrary` prop.
+
 ## New to OpenVizAI?
 
 `@openvizai/core` is the backend intelligence layer.

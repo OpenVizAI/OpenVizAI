@@ -19,8 +19,6 @@ In this guide, you will generate a chart config on your server with `@openvizai/
 
 ```bash
 npm install @openvizai/core @openvizai/react @openvizai/shared-types
-npm install react react-dom apexcharts react-apexcharts
-npm install @langchain/core @langchain/google-genai
 ```
 
 ## Step 1: Generate Chart Metadata On The Server
@@ -91,10 +89,12 @@ Pass the metadata from your server directly into `OpenVizRenderer`.
 
 ```tsx
 import { OpenVizRenderer } from "@openvizai/react";
+import type { ChartLibrary, ChartType } from "@openvizai/shared-types";
 
 type RendererProps = {
   rows: Record<string, unknown>[];
   chartType: "line" | "radar" | "bar" | "range_bar" | "pie" | "donut";
+  chartLibrary: "apexcharts" | "chartjs";
   chartSpec: any;
   meta: {
     title: string;
@@ -105,6 +105,7 @@ type RendererProps = {
 
 export function RevenueChart({
   rows,
+  chartLibrary,
   chartType,
   chartSpec,
   meta,
@@ -112,6 +113,7 @@ export function RevenueChart({
   return (
     <OpenVizRenderer
       data={rows}
+      chartLibrary={chartLibrary}
       chartType={chartType}
       chartSpec={chartSpec}
       meta={meta}

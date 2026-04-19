@@ -30,8 +30,44 @@ npm install @openvizai/react
 ## Peer Dependencies
 
 ```bash
-npm install react react-dom apexcharts react-apexcharts
+npm install react react-dom apexcharts react-apexcharts chart.js react-chartjs-2
 ```
+
+## Library Selection (Required)
+
+Pass `chartLibrary` in every render call.
+
+```tsx
+<OpenVizRenderer
+  data={rows}
+  chartLibrary="apexcharts"
+  chartType={result.chart.chart_type}
+  chartSpec={result.chart.chartSpec}
+  meta={result.meta}
+/>
+```
+
+```tsx
+<OpenVizDashboard data={rows} chartLibrary="chartjs" charts={result.charts} />
+```
+
+## Current Library Support
+
+OpenVizAI currently supports **2 chart libraries** in `@openvizai/react`:
+
+- `apexcharts`
+- `chartjs`
+
+Support matrix:
+
+| Chart Type  | apexcharts | chartjs |
+| ----------- | ---------- | ------- |
+| `line`      | Yes        | Yes     |
+| `bar`       | Yes        | Yes     |
+| `range_bar` | Yes        | Not yet |
+| `pie`       | Yes        | Yes     |
+| `donut`     | Yes        | Yes     |
+| `radar`     | Yes        | Yes     |
 
 ## Full Example
 
@@ -75,6 +111,7 @@ function App() {
     <div className="App">
       <OpenVizRenderer
         data={data}
+        chartLibrary="apexcharts"
         chartType="bar"
         chartSpec={chartSpec}
         meta={meta}
@@ -100,6 +137,7 @@ const { result } = await analyzeChart({
 
 <OpenVizRenderer
   data={rows}
+  chartLibrary="apexcharts"
   chartType={result.chart.chart_type}
   chartSpec={result.chart.chartSpec}
   meta={result.meta}
@@ -108,20 +146,26 @@ const { result } = await analyzeChart({
 
 ## Exports
 
-| Export                                            | Description                                             |
-| ------------------------------------------------- | ------------------------------------------------------- |
-| `OpenVizRenderer`                                 | Renders a single chart from chartSpec metadata          |
-| `OpenVizDashboard`                                | Renders a grid of charts from `analyzeDashboard` output |
-| `registerChart`                                   | Register a custom chart component for a chart type      |
-| `getChartComponent`                               | Get the registered component for a chart type           |
-| `resetChartRegistry`                              | Reset the chart registry to built-in defaults           |
-| `LineChart`, `BarChart`, `PieChart`, `RadarChart` | Individual chart components (for advanced usage)        |
+| Export                                            | Description                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| `OpenVizRenderer`                                 | Renders a single chart from chartSpec metadata               |
+| `OpenVizDashboard`                                | Renders a grid of charts from `analyzeDashboard` output      |
+| `registerChart`                                   | Register a custom chart component for a library + chart type |
+| `getChartComponent`                               | Get the registered component for a library + chart type      |
+| `resetChartRegistry`                              | Reset the chart registry to built-in defaults                |
+| `LineChart`, `BarChart`, `PieChart`, `RadarChart` | Individual chart components (for advanced usage)             |
 
 ## Notes
 
 - Use this package in the frontend/UI layer.
 - Pair with `@openvizai/core` for end-to-end prompt-to-chart flow.
 - The `chartSpec` and `meta` objects come directly from the `analyzeChart()` / `analyzeDashboard()` response.
+
+## Next Plan
+
+- Complete `range_bar` support for `chartjs`.
+- Extend additional chart types with the same library-dispatch pattern.
+- Add new libraries (for example `recharts`) incrementally per chart type.
 
 For full docs, see the root project README:
 https://github.com/OpenVizAI/OpenVizAI
