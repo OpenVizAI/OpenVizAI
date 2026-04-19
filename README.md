@@ -4,9 +4,10 @@
 
 ### Turn any dataset into the right chart. AI picks the chart. JavaScript renders it. Your full dataset never touches an LLM.
 
-![openvizai/core](https://img.shields.io/badge/openvizai%2Fcore-v0.1.2-0A66C2)
-![openvizai/react](https://img.shields.io/badge/openvizai%2Freact-v0.1.2-0A66C2)
+![openvizai/core](https://img.shields.io/badge/openvizai%2Fcore-v0.1.3-0A66C2)
+![openvizai/react](https://img.shields.io/badge/openvizai%2Freact-v0.1.3-0A66C2)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+
 
 The missing intelligence layer between your data pipeline and your visualization.
 
@@ -27,11 +28,11 @@ Prompt and data in. Chart out. Under 3,000 tokens. Every time.
 npm install @openvizai/core @openvizai/react @openvizai/shared-types
 ```
 
-| Package                                                                            | Description                                                                            |
-| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`@openvizai/core`](https://www.npmjs.com/package/@openvizai/core)                 | Chart intelligence engine — analyzes datasets, calls LLM, returns chart metadata       |
-| [`@openvizai/react`](https://www.npmjs.com/package/@openvizai/react)               | React components — renders charts from metadata + dataset using ApexCharts or Chart.js |
-| [`@openvizai/shared-types`](https://www.npmjs.com/package/@openvizai/shared-types) | Shared TypeScript types and constants across packages                                  |
+| Package | Description | Downloads |
+| --- | --- | --- |
+| [`@openvizai/core`](https://www.npmjs.com/package/@openvizai/core) | Chart intelligence engine — analyzes datasets, calls LLM, returns chart metadata | ![npm](https://img.shields.io/npm/dt/@openvizai/core?style=flat-square) |
+| [`@openvizai/react`](https://www.npmjs.com/package/@openvizai/react) | React components — renders charts from metadata + dataset using ApexCharts or Chart.js | ![npm](https://img.shields.io/npm/dt/@openvizai/react?style=flat-square) |
+| [`@openvizai/shared-types`](https://www.npmjs.com/package/@openvizai/shared-types) | Shared TypeScript types and constants across packages | ![npm](https://img.shields.io/npm/dt/@openvizai/shared-types?style=flat-square) |
 
 ## The Problem
 
