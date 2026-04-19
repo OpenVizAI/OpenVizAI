@@ -15,6 +15,7 @@ import type { OpenVizDashboardProps } from "./types/dashboard.js";
  *
  * <OpenVizDashboard
  *   data={rows}
+ *   chartLibrary="apexcharts"
  *   charts={result.charts}
  *   columns={2}
  * />
@@ -22,6 +23,7 @@ import type { OpenVizDashboardProps } from "./types/dashboard.js";
  */
 export default function OpenVizDashboard({
   data,
+  chartLibrary,
   charts,
   config,
   columns = 2,
@@ -78,6 +80,7 @@ export default function OpenVizDashboard({
           </div>
           <OpenVizRenderer
             data={data}
+            chartLibrary={chartLibrary}
             chartType={chart.chart_type}
             chartSpec={chart.chartSpec}
             meta={chart.meta}

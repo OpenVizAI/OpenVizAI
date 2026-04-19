@@ -1,0 +1,35 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0 3.5rem;
+  width: 100%;
+}
+
+.featureCard {
+  height: 100%;
+  padding: 1.15rem 1.1rem 0.85rem;
+  border-radius: 16px;
+  border: 1px solid rgba(31, 79, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 250, 255, 0.92) 100%);
+  box-shadow: 0 10px 24px rgba(15, 30, 84, 0.08);
+}
+
+.featureTitle {
+  margin-bottom: 0.65rem;
+  color: #121d43;
+}
+
+.featureCard p {
+  margin-bottom: 0;
+  color: #111827;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding-top: 1.2rem;
+  }
+
+  .featureCard {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "tutorialSidebar": [
+    "intro",
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        "getting-started/quick-start"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Concepts",
+      "items": [
+        "concepts/architecture"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Core API",
+      "items": [
+        "core/analyze-chart",
+        "core/analyze-dashboard"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "React API",
+      "items": [
+        "react/openviz-renderer",
+        "react/openviz-dashboard"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "OpenVizAI Spec",
+      "items": [
+        "spec/openvizai-spec-v1",
+        "spec/field-reference"
+      ]
+    }
+  ]
+}

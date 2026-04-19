@@ -1,0 +1,106 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 500px at 10% 0%, rgba(31, 79, 255, 0.2), transparent 60%),
+    radial-gradient(1000px 600px at 100% 100%, rgba(255, 122, 40, 0.16), transparent 62%),
+    linear-gradient(145deg, #f5f8ff 0%, #fff9f3 52%, #f4f9ff 100%);
+  border-bottom: 1px solid rgba(31, 79, 255, 0.14);
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: 2rem;
+  align-items: center;
+}
+
+.heroContent {
+  max-width: 720px;
+}
+
+.heroEyebrow {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(31, 79, 255, 0.1);
+  color: #1238b4;
+}
+
+.heroTitle {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.02;
+  color: #111938;
+}
+
+.heroSubtitle {
+  margin-bottom: 1.6rem;
+  max-width: 62ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #324267;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.secondaryButton {
+  border-color: rgba(17, 25, 56, 0.24);
+  color: #111938;
+}
+
+.heroPanel {
+  border-radius: 20px;
+  padding: 1.3rem 1.2rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.92), rgba(244, 249, 255, 0.84));
+  border: 1px solid rgba(31, 79, 255, 0.16);
+  box-shadow:
+    0 14px 34px rgba(18, 38, 103, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.panelLabel {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2349c8;
+}
+
+.panelList {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #1f2f58;
+}
+
+.panelList li {
+  margin-bottom: 0.55rem;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3.2rem 0 2.6rem;
+  }
+
+  .heroInner {
+    grid-template-columns: 1fr;
+  }
+}

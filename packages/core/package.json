@@ -1,6 +1,6 @@
 {
   "name": "@openvizai/core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Core chart intelligence engine for OpenVizAI: infers chart type and embedding metadata from prompt + dataset sample.",
   "license": "MIT",
   "author": "Jay Gajera",

@@ -16,6 +16,7 @@ export { LineChart, BarChart, PieChart, RadarChart } from "./charts/index.js";
 
 // Types
 export type {
+  ChartLibrary,
   ChartSpecField,
   ChartSpec,
   ChartMeta,
