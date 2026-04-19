@@ -27,11 +27,11 @@ Prompt and data in. Chart out. Under 3,000 tokens. Every time.
 npm install @openvizai/core @openvizai/react @openvizai/shared-types
 ```
 
-| Package                                                                            | Description                                                                      |
-| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| [`@openvizai/core`](https://www.npmjs.com/package/@openvizai/core)                 | Chart intelligence engine — analyzes datasets, calls LLM, returns chart metadata |
-| [`@openvizai/react`](https://www.npmjs.com/package/@openvizai/react)               | React components — renders charts from metadata + dataset using ApexCharts       |
-| [`@openvizai/shared-types`](https://www.npmjs.com/package/@openvizai/shared-types) | Shared TypeScript types and constants across packages                            |
+| Package                                                                            | Description                                                                            |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`@openvizai/core`](https://www.npmjs.com/package/@openvizai/core)                 | Chart intelligence engine — analyzes datasets, calls LLM, returns chart metadata       |
+| [`@openvizai/react`](https://www.npmjs.com/package/@openvizai/react)               | React components — renders charts from metadata + dataset using ApexCharts or Chart.js |
+| [`@openvizai/shared-types`](https://www.npmjs.com/package/@openvizai/shared-types) | Shared TypeScript types and constants across packages                                  |
 
 ## The Problem
 
@@ -98,7 +98,7 @@ The result: correct charts from any dataset shape, under 3,000 tokens, every tim
 > → **Smart Sampler** (2–3 rows)
 > → **LLM** decides chart type, axes, series, labels
 > → **Deterministic Chart Runtime** (JS) transforms the full dataset
-> → **ApexCharts** renders the final chart
+> → **Selected Library** (ApexCharts/Chart.js) renders the final chart
 
 **Key insight:** The LLM never sees your full dataset. It receives a small sample and returns a metadata object called a **chartSpec** — a declarative description of how to map fields to axes, series, and categories. Deterministic code does the rest.
 
@@ -122,15 +122,16 @@ This metadata is all the rendering layer needs. The deterministic runtime takes 
 
 ## ChartSpec — The Universal Chart Contract
 
-Every chart library speaks a different language. ApexCharts wants one config shape, 
-Recharts wants another, Chart.js wants a third. This makes AI-generated charts 
+Every chart library speaks a different language. ApexCharts wants one config shape,
+Recharts wants another, Chart.js wants a third. This makes AI-generated charts
 fragile — if you swap your rendering library, everything breaks.
 
 chartSpec solves this by sitting between the AI and the renderer.
 
-The LLM outputs a `chartSpec` — a small, library-agnostic JSON object that describes 
-*what* to visualize (chart type, which fields go where, labels, grouping). 
+The LLM outputs a `chartSpec` — a small, library-agnostic JSON object that describes
+_what_ to visualize (chart type, which fields go where, labels, grouping).
 A renderer adapter then translates that into whatever your chosen chart library expects.
+
 ```json
 {
   "chart_type": "bar",
@@ -148,10 +149,9 @@ chartSpec is an open, versioned standard — `openvizai/spec/v1`. You can:
 - Call any LLM yourself and produce chartSpec-compatible JSON directly
 - Write it by hand for static, pre-configured charts
 
-Any tool that emits `openvizai/spec/v1`-compatible JSON works with every 
-OpenVizAI adapter. See the [chartSpec docs](docs/README.md) for the full schema 
+Any tool that emits `openvizai/spec/v1`-compatible JSON works with every
+OpenVizAI adapter. See the [chartSpec docs](docs/README.md) for the full schema
 and per-chart examples.
-
 
 ## Token Cost
 
@@ -171,14 +171,14 @@ and per-chart examples.
 
 Most AI visualization tools follow a pipeline like this:
 
-|                           | Typical AI Viz Tool                                 | OpenVizAI                                |
-| ------------------------- | --------------------------------------------------- | ---------------------------------------- |
-| **What LLM does**         | Transforms the entire dataset into chart structures | Decides chart type + field mappings only |
-| **Data sent to LLM**      | Full dataset (or large chunks)                      | 2-3 sampled rows                         |
-| **Data transformation**   | LLM-generated (unreliable at scale)                 | Deterministic JS functions               |
-| **Token usage**           | Scales with dataset size                            | Constant (~3K tokens)                    |
-| **Visualization quality** | Data-science style (matplotlib, plotly)             | Production dashboard charts (ApexCharts) |
-| **Rendering**             | Server-side or notebook                             | Client-side, embeddable React components |
+|                           | Typical AI Viz Tool                                 | OpenVizAI                                          |
+| ------------------------- | --------------------------------------------------- | -------------------------------------------------- |
+| **What LLM does**         | Transforms the entire dataset into chart structures | Decides chart type + field mappings only           |
+| **Data sent to LLM**      | Full dataset (or large chunks)                      | 2-3 sampled rows                                   |
+| **Data transformation**   | LLM-generated (unreliable at scale)                 | Deterministic JS functions                         |
+| **Token usage**           | Scales with dataset size                            | Constant (~3K tokens)                              |
+| **Visualization quality** | Data-science style (matplotlib, plotly)             | Production dashboard charts (ApexCharts, Chart.js) |
+| **Rendering**             | Server-side or notebook                             | Client-side, embeddable React components           |
 
 **Compared to tools like Vanna.ai:**
 
@@ -186,7 +186,7 @@ Vanna's pipeline: `User Question → LLM → SQL → Database → Pandas DataFra
 
 Their visualization step uses heuristics: _if categorical + numeric → bar chart, if time series → line chart, if percentage → pie chart._ It works for notebooks, but produces data-science-oriented visuals — not interactive, dashboard-grade charts.
 
-**OpenVizAI's pipeline:** `Dataset → LLM decides visualization strategy → JS engine transforms data → ApexCharts renderer`
+**OpenVizAI's pipeline:** `Dataset → LLM decides visualization strategy → JS engine transforms data → Selected Renderer (ApexCharts/Chart.js)`
 
 The LLM doesn't just match patterns — it understands user intent. Ask for _"show me workforce utilization trends"_ and it picks a line chart with the right axes. Ask for _"compare departments"_ from the same data and it picks a grouped bar chart. Same dataset, different insight, different chart — driven by reasoning, not rules.
 
@@ -235,6 +235,7 @@ import { OpenVizRenderer } from "@openvizai/react";
 
 <OpenVizRenderer
   data={dataset}
+  chartLibrary="apexcharts" // or "chartjs"
   chartType={result.chart_type}
   chartSpec={result.chartSpec}
   meta={result.meta}
@@ -255,8 +256,10 @@ The playground features built-in example datasets so you can start generating ch
 
 ## Roadmap
 
-- [ ] Full ApexCharts chart type coverage (heatmap, scatter, candlestick, treemap, etc.)
+chart type coverage (heatmap, scatter, candlestick, treemap, etc.)
+
 - [ ] Improved sampling strategies for highly skewed and sparse datasets
+- [ ] Support more rendering libraries like Recharts or D3 (ApexCharts and Chart.js currently supported)
 
 - [ ] **VizEngine abstraction** — pluggable renderer interface to target Chart.js, Recharts, or D3 from the same config
 - [ ] **Data insights** — surface trends, anomalies, and statistical summaries from datasets without additional LLM calls

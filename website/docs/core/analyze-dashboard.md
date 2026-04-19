@@ -40,3 +40,13 @@ Each item in `result.charts` includes:
 - `chartSpec`
 
 Use the output with `OpenVizDashboard` in `@openvizai/react`.
+
+```tsx
+import { OpenVizDashboard } from "@openvizai/react";
+
+<OpenVizDashboard
+  data={rows}
+  chartLibrary="apexcharts"
+  charts={result.charts}
+/>;
+```

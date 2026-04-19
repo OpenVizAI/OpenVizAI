@@ -19,6 +19,11 @@
   color: #121d43;
 }
 
+.featureCard p {
+  margin-bottom: 0;
+  color: #111827;
+}
+
 @media screen and (max-width: 996px) {
   .features {
     padding-top: 1.2rem;

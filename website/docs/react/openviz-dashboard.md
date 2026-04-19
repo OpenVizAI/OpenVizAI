@@ -14,8 +14,18 @@ Pass `result.charts` from `analyzeDashboard()`.
 import { OpenVizDashboard } from "@openvizai/react";
 
 export function DashboardView({ rows, dashboardResult }) {
-  return <OpenVizDashboard data={rows} charts={dashboardResult.charts} />;
+  return (
+    <OpenVizDashboard
+      data={rows}
+      chartLibrary="apexcharts"
+      charts={dashboardResult.charts}
+    />
+  );
 }
 ```
+
+Current supported libraries: **2** (`apexcharts`, `chartjs`).
+
+Next plan: extend chart coverage per library while keeping the same dashboard API.
 
 ![OpenVizAI dashboard demo](/img/docs/dashboard.gif)
