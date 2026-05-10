@@ -155,12 +155,6 @@ and per-chart examples.
 
 ## Token Cost
 
-| Dataset Size | Data Sent to LLM | Avg Tokens  | Est. Cost (GPT-4o) |
-| ------------ | ---------------- | ----------- | ------------------ |
-| 1K rows      | 2-3 sampled rows | ~3,000      | ~$0.0004           |
-| 50K rows     | 2-3 sampled rows | ~3,000      | ~$0.0004           |
-| 500K rows    | 2-3 sampled rows | ~3,000      | ~$0.0004           |
-| **Any size** | **Sampled**      | **< 3,000** | **< $0.005**       |
 
 > Token counts include system prompt, data sample, user intent, and full chart config response.
 > Sampling is statistically representative — chart quality doesn't degrade at scale.
